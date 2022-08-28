@@ -20,9 +20,11 @@ class GitHandler:
         progress_bar.message = f"Clone:{repo_fullname}"
         if mirror:
             subprocess.call(["git", "clone", "--mirror",
-                             f"https://{token}@github.com/ {repo_fullname}.git",f"{destination}/{repo_fullname}",
+                             f"https://{token}@github.com/ {repo_fullname}.git",
+                             f"{destination}/{repo_fullname}",
                               "--verbose"], stdout=subprocess.DEVNULL, stderr=STDOUT)
         else:
             subprocess.call(["git", "clone", 
-                            f"https://{token}@github.com/ {repo_fullname}.git",f"{destination}/{repo_fullname}",
+                            f"https://{token}@github.com/ {repo_fullname}.git",
+                            f"{destination}/{repo_fullname}",
                              "--verbose"], stdout=subprocess.DEVNULL, stderr=STDOUT)

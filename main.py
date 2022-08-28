@@ -12,7 +12,7 @@ from git_handler import git_handler
 
 parser = argparse.ArgumentParser(description='Git Backup, running')
 parser.add_argument('-t',type=str, required=True, dest="access_token",
-                    help='Your Github API Access Token')             
+                    help='Your Github API Access Token')
 parser.add_argument('-p',type=str, dest="destination",
                     help='Backup destination path')
 parser.add_argument('--mirror', action="store_true", dest="mirror", help="Git Mirror repositories")
@@ -32,8 +32,10 @@ def get_repositoires(token=str):
     paging = True
     page = 1
     repos = json.loads("[]")
-    while(paging):
-        private_repos = requests.get('https://api.github.com/user/repos', headers={'Authorization':str("token "+token)}, params={'page':page, 'per_page': 100})
+    while paging:
+        private_repos = requests.get('https://api.github.com/user/repos',
+         headers={'Authorization':str("token "+token)},
+         params={'page':page, 'per_page': 100})
         if private_repos.json() == []:
             paging = False
         repos  = repos + private_repos.json()
