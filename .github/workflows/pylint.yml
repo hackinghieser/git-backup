@@ -1,4 +1,5 @@
-name: Pylint
+- name: Pipenv for Github Actions
+  uses: VaultVulp/action-pipenv@v2.0.1
 
 on: [push]
 
@@ -14,12 +15,13 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip3 install pipenv
-        pipenv shell
-        pipenv install
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py')
+        
+    - name: Install dependecies
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: install -d # Install all dependencies, including development ones
+    
+   - name: Test
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command pylint $(git ls-files '*.py')
