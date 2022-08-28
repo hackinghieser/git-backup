@@ -1,0 +1,6 @@
+.DS_Store
+Test
+Pipfile.lock
+.vscode
+__pycache__
+
