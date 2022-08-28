@@ -5,7 +5,7 @@ import argparse
 import json
 import requests
 from progress.bar import Bar
-from git_handler import git_handler
+from git_handler import GitHandler
 
 
 # Setup CLI arguments
@@ -22,7 +22,7 @@ ACCESS_TOKEN = args.access_token or ""
 DESTINATION = args.destination or "."
 mirror = args.mirror
 
-git = git_handler()
+git = GitHandler()
 
 def get_repositoires(token=str):
     """
@@ -35,6 +35,7 @@ def get_repositoires(token=str):
     while paging:
         private_repos = requests.get('https://api.github.com/user/repos',
          headers={'Authorization':str("token "+token)},
+         timeout=2000,
          params={'page':page, 'per_page': 100})
         if private_repos.json() == []:
             paging = False
@@ -44,18 +45,18 @@ def get_repositoires(token=str):
 
 def clone_repositories():
     """
-    Clone repositories from user 
+    Clone repositories from user
     into the destination path
     """
     repositories = get_repositoires(args.access_token)
     print(str("\n ## Repositories found: "+json.dumps(len(repositories)))+ " ## \n")
-    with Bar('Clong repositories', max=len(repositories), 
+    with Bar('Clong repositories', max=len(repositories),
         suffix='%(remaining)d of %(max)d repositories left...') as progress_bar:
         for repo in repositories:
-            git.cloneRepo(repo=repo,
+            git.clone_repo(repo=repo,
                             token=ACCESS_TOKEN,
                             mirror=mirror,
-                            bar=progress_bar,
+                            progress_bar=progress_bar,
                             destination=DESTINATION)
             progress_bar.next()
 

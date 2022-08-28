@@ -28,3 +28,5 @@ class GitHandler:
                             f"https://{token}@github.com/ {repo_fullname}.git",
                             f"{destination}/{repo_fullname}",
                              "--verbose"], stdout=subprocess.DEVNULL, stderr=STDOUT)
+
+    
