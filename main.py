@@ -1,39 +1,34 @@
-import requests
+"""
+GitBackup script
+"""
 import argparse
 import json
+import requests
 from progress.bar import Bar
 from git_handler import git_handler
 
-"""
-Setup CLI arguments
-"""
-parser = argparse.ArgumentParser(description='Git Backup, running')
 
+# Setup CLI arguments
+
+parser = argparse.ArgumentParser(description='Git Backup, running')
 parser.add_argument('-t',type=str, required=True, dest="access_token",
-                    help='Your Github API Access Token')
-                    
+                    help='Your Github API Access Token')             
 parser.add_argument('-p',type=str, dest="destination",
                     help='Backup destination path')
-
-parser.add_argument('-m', action="store_true", dest="mirror", help="Git Mirror repositories")
-
+parser.add_argument('--mirror', action="store_true", dest="mirror", help="Git Mirror repositories")
 args = parser.parse_args()
-
-"""
-Init Attributes
-"""
-
+# Init Attributes
 ACCESS_TOKEN = args.access_token or ""
 DESTINATION = args.destination or "."
 mirror = args.mirror
 
 git = git_handler()
 
-"""
-Get all repositories from 
-user with access token
-"""
-def getRepositoires(token=str):
+def get_repositoires(token=str):
+    """
+    Get all repositories from
+    user with access token
+    """
     paging = True
     page = 1
     repos = json.loads("[]")
@@ -45,24 +40,27 @@ def getRepositoires(token=str):
         page = page + 1
     return repos
 
-"""
-Clone repositories from user 
-into the destination path
-
-"""
-def cloneRepositories():
-    repositories = getRepositoires(args.access_token)
+def clone_repositories():
+    """
+    Clone repositories from user 
+    into the destination path
+    """
+    repositories = get_repositoires(args.access_token)
     print(str("\n ## Repositories found: "+json.dumps(len(repositories)))+ " ## \n")
-    with Bar('Clong repositories', max=len(repositories), suffix='%(remaining)d of %(max)d repositories left...') as bar:
+    with Bar('Clong repositories', max=len(repositories), 
+        suffix='%(remaining)d of %(max)d repositories left...') as progress_bar:
         for repo in repositories:
-            git.cloneRepo(repo=repo,token=ACCESS_TOKEN,mirror=mirror,bar=bar,destination=DESTINATION)
-            bar.next() 
+            git.cloneRepo(repo=repo,
+                            token=ACCESS_TOKEN,
+                            mirror=mirror,
+                            bar=progress_bar,
+                            destination=DESTINATION)
+            progress_bar.next()
 
 
-"""
-Execute Git Backup script
-"""
+
+#Execute Git Backup script
 if __name__ == "__main__":
-    cloneRepositories()
-else: 
+    clone_repositories()
+else:
     print("Done \n")
