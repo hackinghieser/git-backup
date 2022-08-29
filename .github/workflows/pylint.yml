@@ -14,7 +14,8 @@ jobs:
           python-version: 3.7
       - name: Install pipenv
         run: pip install pipenv
+             pipenv install
       - name: Run tests
         run: |
-          pipenv install --dev
-          pipenv run pytest
+          pipenv install pyling
+          pipenv run pylint
