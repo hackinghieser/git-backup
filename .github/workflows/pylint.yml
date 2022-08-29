@@ -20,7 +20,7 @@ jobs:
       with:
         command: install -d # Install all dependencies, including development ones
         
-    - name: Test
+    - name: Run PyLint
       uses: VaultVulp/action-pipenv@v2.0.1
       with:
-        command: pipenv pylint $(git ls-files '*.py')
+        command: pylint $(git ls-files '*.py')
