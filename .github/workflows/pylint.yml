@@ -1,25 +1,15 @@
-name: Pylint
+install-test:
+   runs-on: ubuntu-latest
 
-on: [push]
+    steps:
+    - uses: actions/checkout@v2 # Checking out the repo
 
-jobs:
-   build:
-     runs-on: ubuntu-latest
-     strategy:
-       matrix:
-         python-version: ["3.8", "3.9", "3.10"]
-     steps:
-     - uses: actions/checkout@v3
-     - name: Set up Python ${{ matrix.python-version }}
-       uses: actions/setup-python@v3
-       with:
-         python-version: ${{ matrix.python-version }}
-     - name: Install dependencies
-       run: |
-         python -m pip install --upgrade pip
-         python -m pip install pipenv
-         pipenv install pylint
-         pipenv run pylint
-     - name: Analysing the code with pylint
-       run: |
-         pipenv pylint $(git ls-files '*.py')
+    - name: Install dependecies
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: install -d # Install all dependencies, including development ones
+    
+    - name: Test
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: run pyling # Run custom `test` command defined in the `[scripts]`
