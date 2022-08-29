@@ -19,8 +19,8 @@ jobs:
       uses: VaultVulp/action-pipenv@v2.0.1
       with:
         command: install -d # Install all dependencies, including development ones
-
-   - name: Test
+        
+    - name: Test
       uses: VaultVulp/action-pipenv@v2.0.1
       with:
-        command pylint $(git ls-files '*.py')
+        command: pylint $(git ls-files '*.py')
