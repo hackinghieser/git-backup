@@ -14,10 +14,13 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        pylint $(git ls-files '*.py')
+
+    - name: Install dependecies
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: install -d # Install all dependencies, including development ones
+        
+    - name: Run PyLint
+      uses: VaultVulp/action-pipenv@v2.0.1
+      with:
+        command: pylint $(git ls-files '*.py')
