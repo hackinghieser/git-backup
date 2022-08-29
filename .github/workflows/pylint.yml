@@ -23,4 +23,4 @@ jobs:
     - name: Test
       uses: VaultVulp/action-pipenv@v2.0.1
       with:
-        command: pylint $(git ls-files '*.py')
+        command: pipenv pylint $(git ls-files '*.py')
