@@ -8,9 +8,17 @@ from progress.bar import Bar
 from git_handler import GitHandler
 
 
+print(" @@@@@@@  @@@ @@@@@@@ @@@@@@@   @@@@@@   @@@@@@@ @@@  @@@ @@@  @@@ @@@@@@@ \n" +
+       "!@@       @@!   @!!   @@!  @@@ @@!  @@@ !@@      @@!  !@@ @@!  @@@ @@!  @@@ \n" +
+       "!@! @!@!@ !!@   @!!   @!@!@!@  @!@!@!@! !@!      @!@@!@!  @!@  !@! @!@@!@! \n" +
+       ":!!   !!: !!:   !!:   !!:  !!! !!:  !!! :!!      !!: :!!  !!:  !!! !!: \n" +
+       " :: :: :  :      :    :: : ::   :   : :  :: :: :  :   :::  :.:: :   :     \n \n ")
+
+
 # Setup CLI arguments
 
-parser = argparse.ArgumentParser(description='Git Backup, running')
+parser = argparse.ArgumentParser(description='Welcome, use cmd line arguments '+
+'or wizard to create your remote backups.')
 parser.add_argument('-t',type=str, required=True, dest="access_token",
                     help='Your Github API Access Token')
 parser.add_argument('-p',type=str, dest="destination",

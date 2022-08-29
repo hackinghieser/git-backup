@@ -5,11 +5,13 @@ from asyncio.subprocess import STDOUT
 import subprocess
 from progress.bar import Bar
 
-class GitHandler:
+class GitHandler(object):
     """
     Implements different methods
     to handle git repositories
     """
+    def __init__(self) -> None:
+        pass
     def clone_repo(self,repo:any,token:str,mirror:bool,progress_bar:Bar,destination:str):
         """
         Clone provided repository into
