@@ -17,5 +17,5 @@ jobs:
              pipenv install
       - name: Run tests
         run: |
-          pipenv install pyling
+          pipenv install pylint
           pipenv run pylint
