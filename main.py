@@ -23,11 +23,14 @@ parser.add_argument('-t',type=str, required=True, dest="access_token",
                     help='Your Github API Access Token')
 parser.add_argument('-p',type=str, dest="destination",
                     help='Backup destination path')
+parser.add_argument('-u',type=str, dest="username",
+                    help='Username')
 parser.add_argument('--mirror', action="store_true", dest="mirror", help="Git Mirror repositories")
 args = parser.parse_args()
 # Init Attributes
 ACCESS_TOKEN = args.access_token or ""
 DESTINATION = args.destination or "."
+USERNAME = args.username or ""
 mirror = args.mirror
 
 git = GitHandler()
@@ -57,16 +60,28 @@ def clone_repositories():
     into the destination path
     """
     repositories = get_repositoires(args.access_token)
-    print(str("\n ## Repositories found: "+json.dumps(len(repositories)))+ " ## \n")
+    print(str("\n ## Repositories found (private,public and invitations): "+json.dumps(len(repositories)))+ " ## \n")
+    if USERNAME != "":
+        print(f"Filter for Username: {USERNAME}")
+    
     with Bar('Clong repositories', max=len(repositories),
         suffix='%(remaining)d of %(max)d repositories left...') as progress_bar:
         for repo in repositories:
-            git.clone_repo(repo=repo,
-                            token=ACCESS_TOKEN,
-                            mirror=mirror,
-                            progress_bar=progress_bar,
-                            destination=DESTINATION)
-            progress_bar.next()
+            if USERNAME != "":
+                if repo["owner"]["login"] == USERNAME:
+                    git.clone_repo(repo=repo,
+                                    token=ACCESS_TOKEN,
+                                    mirror=mirror,
+                                    progress_bar=progress_bar,
+                                    destination=DESTINATION)
+                    progress_bar.next()
+            else:
+                    git.clone_repo(repo=repo,
+                                    token=ACCESS_TOKEN,
+                                    mirror=mirror,
+                                    progress_bar=progress_bar,
+                                    destination=DESTINATION)
+                    progress_bar.next()
 
 
 
