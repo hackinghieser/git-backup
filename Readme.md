@@ -1,3 +1,5 @@
+[![Python application](https://github.com/AlexanderHieser/git-backup/actions/workflows/pylint.yml/badge.svg)](https://github.com/AlexanderHieser/git-backup/actions/workflows/pylint.yml)
+
 # Git Backup
 
 ![Welcome](/docu/git_backup_header.png)
@@ -14,4 +16,8 @@ Provide the following parameters to the cmd:
 
 ## Contribution
 
+<<<<<<< HEAD
 Just create a PR, no guidlines at the moment ;)
+=======
+## Contribution
+>>>>>>> 83dcf5552fd00ea4afac3758c93ad38570936f4d
