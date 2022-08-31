@@ -1,7 +1,6 @@
 """
 Handles Git functions
 """
-from asyncio.subprocess import STDOUT
 import subprocess
 from progress.bar import Bar
 
@@ -22,13 +21,13 @@ class GitHandler(object):
         progress_bar.message = f"Clone:{repo_fullname}"
         if mirror:
             subprocess.call(["git", "clone", "--mirror",
-                             f"https://{token}@github.com/ {repo_fullname}.git",
+                             f"https://{token}@github.com/{repo_fullname}.git",
                              f"{destination}/{repo_fullname}",
-                              "--verbose"], stdout=subprocess.DEVNULL, stderr=STDOUT)
+                              "--verbose"])
         else:
-            subprocess.call(["git", "clone", 
-                            f"https://{token}@github.com/ {repo_fullname}.git",
+            subprocess.call(["git", "clone",
+                            f"https://{token}@github.com/{repo_fullname}.git",
                             f"{destination}/{repo_fullname}",
-                             "--verbose"], stdout=subprocess.DEVNULL, stderr=STDOUT)
+                             "--verbose"])
 
     
