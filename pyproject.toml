@@ -6,7 +6,7 @@ autopep8 = "^1.7.0"
 
 [tool.poetry]
 name = "git-backup-tool"
-version = "0.1.0"
+version = "0.1.1"
 description = "Backup Github, Bitbucket or Gitlab repositories"
 authors = ["Alexander Hieser <Alexander.Hieser@online.de>"]
 license = "MIT"
