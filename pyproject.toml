@@ -1,11 +1,17 @@
+[tool.poetry.scripts]
+git-backup-tool = "gitbackup.git_backup:run_cli"
+
+[tool.poetry.group.dev.dependencies]
+autopep8 = "^1.7.0"
+
 [tool.poetry]
-name = "git-backup"
+name = "git-backup-tool"
 version = "0.1.0"
 description = "Backup Github, Bitbucket or Gitlab repositories"
 authors = ["Alexander Hieser <Alexander.Hieser@online.de>"]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "git-backup"}]
+packages = [{include = "gitbackup"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 requests = "*"

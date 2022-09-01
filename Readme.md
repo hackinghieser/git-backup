@@ -14,7 +14,7 @@ Provide the following parameters to the cmd:
 -t ACCESS_TOKEN  Your Github API Access Token
 -p DESTINATION   Backup destination path
 --mirror         Mirror repositories
--u USERNAME      Username filtering
+-u USERNAME      Username filteringg
 ```
 
 ## Contribution
