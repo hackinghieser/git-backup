@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "git-backup"
+version = "0.1.0"
+description = "Backup Github, Bitbucket or Gitlab repositories"
+authors = ["Alexander Hieser <Alexander.Hieser@online.de>"]
+license = "MIT"
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "*"
+argparse = "*"
+gitpython = "*"
+progress = "*"
+pylint = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
