@@ -3,15 +3,14 @@ GitBackup script
 """
 import argparse
 import json
-from pickle import TRUE
+from shutil import which
 import requests
 from progress.bar import Bar
 from gitbackup.githandler import GitHandler
-from shutil import which
 
 def check_git():
     """Check if 'GIT' is in path"""
-    return which('git') is not None;
+    return which('git') is not None
 
 def get_repositoires(token=str):
     """
